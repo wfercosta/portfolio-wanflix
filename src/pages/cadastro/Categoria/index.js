@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
@@ -8,13 +8,22 @@ import Button from '../../../components/Button';
 
 function Categoria() {
   const CATEGORIA_VALORES_INICIAIS = {
-    nome: '',
+    titulo: '',
     descricao: '',
     cor: '#000',
   };
 
   const [categorias, setCategorias] = useState([]);
   const [categoria, setCategoria] = useState(CATEGORIA_VALORES_INICIAIS);
+
+  useEffect(() => {
+    const url = 'http://localhost:8080/categorias';
+
+    fetch(url).then(async (response) => {
+      const data = await response.json();
+      setCategorias([...data]);
+    });
+  }, []);
 
   function handleSubmit(event) {
     setCategorias([...categorias, categoria]);
@@ -64,7 +73,7 @@ function Categoria() {
 
       <ul>
         {categorias.map((value, index) => (
-          <li key={`${value.nome}_${index}`}>{value.nome}</li>
+          <li key={`${value.id}`}>{value.titulo}</li>
         ))}
       </ul>
 
