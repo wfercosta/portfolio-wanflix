@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import PageDefault from "../../../components/PageDefault";
-import FormField from "../../../components/FormField";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import PageDefault from '../../../components/PageDefault';
+import FormField from '../../../components/FormField';
+import Button from '../../../components/Button';
 
 // import { Container } from './styles';
 
 function Categoria() {
-
   const CATEGORIA_VALORES_INICIAIS = {
     nome: '',
     descricao: '',
-    cor: '#000'
-  }
+    cor: '#000',
+  };
 
   const [categorias, setCategorias] = useState([]);
   const [categoria, setCategoria] = useState(CATEGORIA_VALORES_INICIAIS);
@@ -24,12 +24,15 @@ function Categoria() {
 
   function handleChange(event) {
     const { name, value } = event.target;
-    setCategoria({...categoria, [name]: value})
+    setCategoria({ ...categoria, [name]: value });
   }
 
   return (
     <PageDefault>
-      <h1>Cadastro Categoria: {categoria.nome} </h1>
+      <h1>
+        Cadastro Categoria:
+        {categoria.nome}
+      </h1>
 
       <form onSubmit={handleSubmit}>
         <FormField
@@ -43,7 +46,7 @@ function Categoria() {
         <FormField
           label="Descrição"
           name="descricao"
-          type="textarea"
+          as="textarea"
           value={categoria.descricao}
           onChange={handleChange}
         />
@@ -56,7 +59,7 @@ function Categoria() {
           onChange={handleChange}
         />
 
-        <button>Cadastrar</button>
+        <Button>Cadastrar</Button>
       </form>
 
       <ul>
